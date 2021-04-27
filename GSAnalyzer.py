@@ -255,37 +255,36 @@ class GSAnalyzer:
         writer.save()
         print(f'File {self.res_dir}{self.gs_name} GSProfile_{self.date}.xlsx saved!')
 
-    def gs_profiles_generators_by_urls(self, urls, add2database=True):
+    def gs_profiles_generators_by_urls(self, urls, n_gram=2, most_used=20, add2database=True):
         if not type(urls) is list:
             print('Please enter a list of urls!')
             try:
                 self.loading_gs_homepage(urls)
-                self.gs_profile_generator(add2database=add2database)
+                self.gs_profile_generator(n_gram=n_gram, most_used=most_used, add2database=add2database)
             except:
                 self.close()
         else:
             for url in urls:
                 try:
                     self.loading_gs_homepage(url)
-                    self.gs_profile_generator(add2database=add2database)
+                    self.gs_profile_generator(n_gram=n_gram, most_used=most_used, add2database=add2database)
                 except:
                     print(f'Nothing found in {url}')
         self.close()
 
-    def gs_profiles_generators_by_queries(self, queries, add2database=True):
+    def gs_profiles_generators_by_queries(self, queries, n_gram=2, most_used=20, add2database=True):
         if not type(queries) is list:
             url = gshp_link_by_query(queries)
             if url is not None:
                 self.loading_gs_homepage(url)
-                self.gs_profile_generator(add2database=add2database)
+                self.gs_profile_generator(n_gram=n_gram, most_used=most_used, add2database=add2database)
         else:
             urls = []
             for query in queries:
                 url = gshp_link_by_query(query)
                 if url is not None:
                     urls.append(url)
-            self.gs_profiles_generators_by_urls(urls, add2database)
+            self.gs_profiles_generators_by_urls(urls, n_gram=n_gram, most_used=most_used, add2database=add2database)
 
     def close(self):
         self.wd.quit()
-
