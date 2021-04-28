@@ -43,7 +43,10 @@ g.close()
 urls = ['https://scholar.google.com/citations?user=2M6S-aAAAAAJ&hl=en',
         'https://scholar.google.com/citations?user=66ioxOQAAAAJ&hl=en']
 # You do not have to do anything other than the following code
-g.gs_profiles_generators_by_urls(urls, n_gram=2, most_used=20, add2database=True))
+g.gs_profiles_generators_by_urls(urls, loading_sp=loading_sp, pages_to_load=pages_to_load, n_gram=2, most_used=20, add2database=True))
+
+# You can pass a link in a list or as stirng to g.gs_profiles_generators_by_urls() as well and it works same way. 
+
 ```
 
 The current program also allows you to scrape researchers' academic information available on Google Scholar by queries. 
@@ -54,7 +57,7 @@ from selenium import webdriver
 queries = ['Claude E Shannon', 'Ronald A. Fisher', 'Max Karl Ernst Ludwig Planck']
 wd = webdriver.Chrome('/usr/local/bin/chromedriver')
 g = GSAnalyzer(wd, '/Users/wzx/Downloads/')
-g.gs_profiles_generators_by_queries(queries, n_gram=2, most_used=20, add2database=True)
+g.gs_profiles_generators_by_queries(queries, loading_sp=loading_sp, pages_to_load=pages_to_load, n_gram=2, most_used=20, add2database=True)
 
 # If you only have one query, it is still ok to use the above function directly.
 # You can either put the query in a list or as a string.
