@@ -118,18 +118,18 @@ class GSAnalyzer:
         # basic info: name, affiliation, homepage (if any), gs_url, specialization,
         # all-time citation, past 5 year citation, date recorded
 
-        self.gs_name = wd.find_element_by_xpath('//*[@id="gsc_prf_in"]').text
+        self.gs_name = self.wd.find_element_by_xpath('//*[@id="gsc_prf_in"]').text
         try:
-            affiliation = wd.find_element_by_xpath('//*[@id="gsc_prf_i"]/div[2]/a').text
+            affiliation = self.wd.find_element_by_xpath('//*[@id="gsc_prf_i"]/div[2]/a').text
         except:
             affiliation = 'Unknown'
         try:
-            homepage = wd.find_element_by_xpath('//*[@id="gsc_prf_ivh"]/a').get_attribute('href')
+            homepage = self.wd.find_element_by_xpath('//*[@id="gsc_prf_ivh"]/a').get_attribute('href')
         except:
             homepage = 'Not available'
         specialization = '; '.join(self.list_of_texts_by_xpath('//*[@id="gsc_prf_int"]/a'))
-        all_citation = wd.find_element_by_xpath('//*[@id="gsc_rsb_st"]/tbody/tr[1]/td[2]').text
-        past5y_citation = wd.find_element_by_xpath('//*[@id="gsc_rsb_st"]/tbody/tr[1]/td[3]').text
+        all_citation = self.wd.find_element_by_xpath('//*[@id="gsc_rsb_st"]/tbody/tr[1]/td[2]').text
+        past5y_citation = self.wd.find_element_by_xpath('//*[@id="gsc_rsb_st"]/tbody/tr[1]/td[3]').text
 
         self.date = datetime.now().strftime('%Y-%m-%d')
         return [self.gs_name, affiliation, homepage, self.url, specialization, all_citation, past5y_citation, self.date]
